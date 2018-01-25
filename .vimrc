@@ -1,4 +1,3 @@
-" test
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -21,6 +20,9 @@ map <F5> :call Run()<CR>
 imap <F5> <ESC>:call Run()<CR>
 vmap <F5> <ESC>:call Run()<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Quickly Run
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 func! Run()
 	exec "w"
 	if &filetype == 'python'
@@ -28,6 +30,11 @@ func! Run()
 	elseif &filetype == 'c'
 		exec "!gcc % -o %<"
 		exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec '!g++ % -o %<'
+        exec '!time ./%<'
+    elseif &filetype == 'sh'
+        :!time bash %
 	endif
 endfunc
 
