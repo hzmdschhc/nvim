@@ -35,6 +35,8 @@ func! Run()
         exec '!time ./%<'
     elseif &filetype == 'sh'
         :!time bash %
+    elseif &filetype == 'matlab'
+        exec "!octave-cli %"
 	endif
 endfunc
 
