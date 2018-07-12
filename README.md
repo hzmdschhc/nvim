@@ -3,7 +3,6 @@
 run ./install.sh
 
 ## Result
-copy ~/.vimrc to ./oldvimrc
-
-copy ./.vimrc to ~/.vimrc
+if ~/.vimrc has existsed, copy ~/.vimrc to ./vimrc.old
+then copy ./vimrc to ~/.vimrc
 

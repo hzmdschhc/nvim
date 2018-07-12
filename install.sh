@@ -1,11 +1,12 @@
 #!/bin/bash
-dire="oldvimrc"
-if [ -d "$dire" ]; then
-    rm -r "$dire"
-    mkdir "$dire"
+if [ -e "/home/$USER/.vimrc" ]; then
+    echo ".vimrc has existsed in ~"
+    echo "copy .vimrc to ./vimrc/vimrc.old"
+    mv ~/.vimrc ./vimrc.old
 else
-    mkdir "$dire"
+    echo ".vimrc has NOT existsed in ~"
+    echo "copy a new .vimrc to ~"
 fi
-cp ~/.vimrc oldvimrc
-cp .vimrc ~/
+cp vimrc ~/.vimrc
+echo "finished!"
 
