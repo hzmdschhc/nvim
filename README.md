@@ -2,8 +2,8 @@
 ## Install
 run ./install.sh
 
-## Result
-if ~/.vimrc has existsed, copy ~/.vimrc to ./vimrc.old
+It will backup ~/.vimrc to vimrc.old, and then copy vimrc to ~/.vimrc
 
-then copy ./vimrc to ~/.vimrc
+## Uninstall
+run ./uninstall.sh
 

@@ -11,34 +11,33 @@ set textwidth=79
 set expandtab
 set smartindent
 set fileformat=unix
-
 set encoding=utf-8
+set pastetoggle=<F3>
 syntax on
-set nu
+" set nu
 
 map <F5> :call Run()<CR>
 imap <F5> <ESC>:call Run()<CR>
 vmap <F5> <ESC>:call Run()<CR>
 
-set pastetoggle=<F3>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickly Run
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 func! Run()
 	exec "w"
 	if &filetype == 'python'
-		exec "!time python3 %"
+		exec "!python3 %"
 	elseif &filetype == 'c'
 		exec "!gcc % -o %<"
-		exec "!time ./%<"
+		exec "!./%<"
     elseif &filetype == 'cpp'
         exec '!g++ % -o %<'
-        exec '!time ./%<'
+        exec '!./%<'
     elseif &filetype == 'sh'
-        :!time bash %
+        :!bash %
     elseif &filetype == 'matlab'
         exec "!octave-cli %"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!java %:r"
 	endif
 endfunc
 
