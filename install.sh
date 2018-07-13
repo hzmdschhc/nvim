@@ -8,5 +8,5 @@ else
     echo "copy a new .vimrc to ~"
 fi
 cp vimrc ~/.vimrc
-echo "finished!"
+echo "done"
 
