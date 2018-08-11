@@ -86,8 +86,9 @@ func! Run()
 		exec "!gcc % -o %<"
 		exec "!./%<"
     elseif &filetype == 'cpp'
-        exec '!g++ % -o %<'
-        exec '!./%<'
+        exec '!g++ -Wall -std=c++11 %'
+        exec '!./a.out'
+        exec '!rm a.out'
     elseif &filetype == 'sh'
         :!bash %
     elseif &filetype == 'matlab'
@@ -137,4 +138,7 @@ func! Annotation()
     endif
 endfunc
 
+if &filetype == 'cpp'
+    set cindent
+endif
 

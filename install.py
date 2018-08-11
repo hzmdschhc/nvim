@@ -23,14 +23,17 @@ def vimrc_install(target_path, src_path):
     if os.path.exists(target_path):
         print('vimrc:', vimrc_path, 'Found')
         print('vimrc: Back up it to vimrc/vimrc.bak')
+        if not os.path.exists('./backup'):
+            print('vimrc: directory backup/ Not found')
+            print('vimrc: creating backup/')
+            os.mkdir('./backup')
         shutil.copyfile(target_path, './backup/vimrc.bak')
     else:
         print('vimrc:', target_path, 'Not found')
         print('vimrc: create a new .vimrc in ~')
-    
     shutil.copyfile(src_path, target_path)
     print('vimrc: done\n')
-    
+
 # directory colors
 def colors_install(target_path, src_path):
     if not os.path.exists(target_path):
@@ -39,13 +42,11 @@ def colors_install(target_path, src_path):
         os.makedirs(target_path)
     else:
         print('colors: Found')
-    
     print('colors: coping some color.vim to %s' % target_path)
     if src_path[-1] != '/':
         src_path += '/'
     for filename in os.listdir(src_path):
         shutil.copy(src_path + filename, target_path)
-    
     print('colors: done\n')
 
 # remove vundle code in vimrc
