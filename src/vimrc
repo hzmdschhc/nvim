@@ -131,9 +131,9 @@ map <F4> :call Annotation()<CR>
 func! Annotation()
     if &filetype == 'python'
         if getline(".")[0] == '#'
-            exec ".s/#/"
+            exec ".s/# /"
         else
-            exec ".s/^/#"
+            exec ".s/^/# "
         endif
     endif
 endfunc
