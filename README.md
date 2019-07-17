@@ -4,9 +4,8 @@ run ./install.py
 
 It will: 
 
-1. backup ~/.vimrc to vimrc.bak, and then copy vimrc to ~/.vimrc
-2. if ./colors/ has *.vim files, it will copy *.vim to ~/.vim/colors
-3. install Vundle if you want
+1. backup ~/.vimrc to src/vimrc.bak, and then copy src/vimrc to ~/.vimrc
+2. install Vundle
 
 ## Uninstall
 run ./uninstall.sh

@@ -21,7 +21,7 @@ def vundle_install(target_path):
 # vimrc
 def vimrc_install(target_path, src_path):
     if os.path.exists(target_path):
-        print('vimrc:', vimrc_path, 'Found')
+        print('vimrc:', vimrc_path, 'already exists')
         print('vimrc: Back it up to ./src/vimrc.bak')
         shutil.copyfile(target_path, './src/vimrc.bak')
 
