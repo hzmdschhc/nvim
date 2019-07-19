@@ -19,11 +19,14 @@ Plug 'vim-airline/vim-airline-themes'
 " 注释
 Plug 'scrooloose/nerdcommenter'
 
+" 多点编辑
+Plug 'terryma/vim-multiple-cursors'
+
 " Initialize plugin system
 call plug#end()
 
 " setting: Plugin 'scrooloose/nerdtree'
-map <C-n> :NERDTreeToggle<CR>
+map <C-m> :NERDTreeToggle<CR>
 
 " colortheme
 colorscheme gruvbox
