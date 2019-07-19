@@ -31,6 +31,7 @@ syntax on
 set nu
 set laststatus=2
 set scrolloff=3
+set cc=80
 
 " 搜索忽略大小写
 " set ignorecase
