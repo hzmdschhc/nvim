@@ -12,6 +12,12 @@ Plug 'jiangmiao/auto-pairs'
 " colortheme
 Plug 'morhetz/gruvbox'
 
+" 状态栏
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" 注释
+Plug 'scrooloose/nerdcommenter'
 
 " Initialize plugin system
 call plug#end()
@@ -19,10 +25,13 @@ call plug#end()
 " setting: Plugin 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 
-
 " colortheme
 colorscheme gruvbox
 set background=dark
+
+let g:airline_theme='simple'
+
+let g:NERDSpaceDelims = 1
 
 set tabstop=4
 set softtabstop=4
@@ -33,11 +42,15 @@ set fileformat=unix
 set encoding=utf-8
 syntax on
 set nu
-set laststatus=2
-set scrolloff=3
+
+" 距离底部或顶部还有5行时滚动
+set scrolloff=5
 
 " 80字符线
 set cc=80
+
+" 查找时不高亮
+set nohlsearch
 
 " 搜索忽略大小写
 " set ignorecase
@@ -79,28 +92,7 @@ nnoremap <C-H> <C-W><C-H>
 set tags=tags
 set tags+=./tags
 
-" 自动在行首插入注释符号
-" 支持python和sh，即在行首插入#
-" 可用shift+v,选中多行，批量注释
-map <F2> :call Annotation()<CR>
-
-func! Annotation()
-    let allow = 0
-    if &filetype == 'python' || &filetype == 'sh'
-        let sep='#'
-        let allow = 1
-    endif
-
-    if allow
-        if getline(".")[0] == sep
-            exec ".s/" . sep . " /"
-        else
-            exec ".s/^/" . sep . " "
-        endif
-    endif
-endfunc
-
-set pastetoggle=<F3>
+set pastetoggle=<F2>
 
 map <F5> :call Run()<CR>
 imap <F5> <ESC>:call Run()<CR>
