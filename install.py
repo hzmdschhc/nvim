@@ -5,8 +5,11 @@ import getpass
 import shutil
 
 # Vundle
-def vundle_install(target_path):
-    if  os.path.exists(vundle_path):
+def vundle_install():
+    user = getpass.getuser()
+    target_path = F'/home/{user}/.vim/bundle/Vundle.vim'
+
+    if  os.path.exists(target_path):
         print('Vundle: already installed')
     else:
         print('Vundle: Installing...')
@@ -18,10 +21,29 @@ def vundle_install(target_path):
     print('Vundle: Plugin install done')
     print('Vundle: done\n')
 
+# vim-plug
+def vim_plug_install():
+    user = getpass.getuser()
+    target_path = F'/home/{user}/.vim/autoload/plug.vim'
+
+    if  os.path.exists(target_path):
+        print('vim-plug: already installed')
+    else:
+        print('vim-plug: Installing...')
+        os.system('curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+
+    os.system('vim +PlugInstall +qall')
+    print('vim-plug: done\n')
+
 # vimrc
-def vimrc_install(target_path, src_path):
+def vimrc_install():
+    user = getpass.getuser()
+    target_path = F'/home/{user}/.vimrc'
+    src_path = './src/vimrc'
+
     if os.path.exists(target_path):
-        print('vimrc:', vimrc_path, 'already exists')
+        print('vimrc:', 'already exists')
         print('vimrc: Back it up to ./src/vimrc.bak')
         shutil.copyfile(target_path, './src/vimrc.bak')
 
@@ -33,13 +55,8 @@ def ctags_install():
 
 
 if __name__ == '__main__':
-    user = getpass.getuser()
-    vimrc_path = F'/home/{user}/.vimrc'
-    vimrc_src_path = './src/vimrc'
-    vundle_path = F'/home/{user}/.vim/bundle/Vundle.vim'
-
-    vimrc_install(vimrc_path, vimrc_src_path)
-    vundle_install(vundle_path)
+    vimrc_install()
+    vim_plug_install()
     
     print('Enjoy!')
 
