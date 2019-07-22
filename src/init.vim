@@ -1,7 +1,11 @@
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.local/share/nvim/plugged')
+if has('nvim')
+    call plug#begin('~/.local/share/nvim/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
 
 
 " colortheme
@@ -51,7 +55,7 @@ set background=dark
 
 " 支持python3
 if has('nvim')
-    let g:python3_host_prog = "/home/chao/anaconda3/bin/python3"
+    let g:python3_host_prog = $HOME . "/anaconda3/bin/python3"
 endif
 
 set tabstop=4
