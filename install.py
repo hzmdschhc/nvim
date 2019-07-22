@@ -24,13 +24,13 @@ def vundle_install():
 # vim-plug
 def vim_plug_install():
     user = getpass.getuser()
-    target_path = F'/home/{user}/.vim/autoload/plug.vim'
+    target_path = F'/home/{user}/.local/share/nvim/site/autoload/plug.vim'
 
     if  os.path.exists(target_path):
         print('vim-plug: already installed')
     else:
         print('vim-plug: Installing...')
-        os.system('curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        os.system('curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
                 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
 
     os.system('vim +PlugInstall +qall')
@@ -49,9 +49,6 @@ def vimrc_install():
 
     shutil.copyfile(src_path, target_path)
     print('vimrc: done\n')
-
-def ctags_install():
-    pass
 
 
 if __name__ == '__main__':

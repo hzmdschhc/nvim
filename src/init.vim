@@ -4,37 +4,55 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 
+" colortheme
+Plug 'morhetz/gruvbox'
+
+" 文件导航栏
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+map <C-m> :NERDTreeToggle<CR>
 
 " 括号引号自动配对
 Plug 'jiangmiao/auto-pairs'
 
-" colortheme
-Plug 'morhetz/gruvbox'
-
 " 状态栏
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='simple'
 
 " 注释
 Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
 
 " 多点编辑
 Plug 'terryma/vim-multiple-cursors'
 
+" Requirements
+Plug 'roxma/nvim-yarp'
+
+" 自动补全
+if has('nvim')
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-path'
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-jedi'
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    " IMPORTANT: :help Ncm2PopupOpen for more information
+    set completeopt=noinsert,menuone,noselect
+endif
+
 " Initialize plugin system
 call plug#end()
 
-" setting: Plugin 'scrooloose/nerdtree'
-map <C-m> :NERDTreeToggle<CR>
 
 " colortheme
 colorscheme gruvbox
 set background=dark
 
-let g:airline_theme='simple'
-
-let g:NERDSpaceDelims = 1
+" 支持python3
+if has('nvim')
+    let g:python3_host_prog = "/home/chao/anaconda3/bin/python3"
+endif
 
 set tabstop=4
 set softtabstop=4
@@ -48,9 +66,6 @@ set nu
 
 " 距离底部或顶部还有5行时滚动
 set scrolloff=5
-
-" 80字符线
-set cc=80
 
 " 查找时不高亮
 set nohlsearch
@@ -83,7 +98,6 @@ endfunc
 
 autocmd BufNewFile * call SetHeader()
 autocmd BufNewFile * normal G
-
 
 " 窗口切换快捷键
 nnoremap <C-J> <C-W><C-J>
@@ -122,3 +136,4 @@ func! Run()
         exec "!java %:r"
 	endif
 endfunc
+
