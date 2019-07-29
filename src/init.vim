@@ -13,7 +13,6 @@ Plug 'morhetz/gruvbox'
 
 " 文件导航栏
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-map <C-m> :NERDTreeToggle<CR>
 
 " 括号引号自动配对
 Plug 'jiangmiao/auto-pairs'
