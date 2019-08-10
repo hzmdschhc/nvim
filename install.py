@@ -1,59 +1,28 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
+# **************************************
+# Author        :   huangchao
+# Created Time  :   2019-07-22 22:09:41
+# **************************************
+
 import os
 import getpass
 import shutil
 
-# Vundle
-def vundle_install():
-    user = getpass.getuser()
-    target_path = F'/home/{user}/.vim/bundle/Vundle.vim'
+USER = getpass.getuser()
 
-    if  os.path.exists(target_path):
-        print('Vundle: already installed')
-    else:
-        print('Vundle: Installing...')
-        os.system('git clone https://github.com/VundleVim/Vundle.vim.git'
-            + ' ~/.vim/bundle/Vundle.vim')
+# copy init.vim
+obj_dir = F'/home/{USER}/.config/nvim'
+if not os.path.exists(obj_dir):
+    os.mkdir(obj_dir)
+shutil.copy('init.vim', obj_dir)
 
-    print('Vundle: Plugin installing...')
-    os.system('vim +PluginInstall +qall')
-    print('Vundle: Plugin install done')
-    print('Vundle: done\n')
+# install vim-plug
+os.system('curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
 
-# vim-plug
-def vim_plug_install():
-    user = getpass.getuser()
-    target_path = F'/home/{user}/.local/share/nvim/site/autoload/plug.vim'
+# install plug
+os.system('nvim +PlugInstall +qall')
 
-    if  os.path.exists(target_path):
-        print('vim-plug: already installed')
-    else:
-        print('vim-plug: Installing...')
-        os.system('curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-
-    os.system('vim +PlugInstall +qall')
-    print('vim-plug: done\n')
-
-# vimrc
-def vimrc_install():
-    user = getpass.getuser()
-    target_path = F'/home/{user}/.vimrc'
-    src_path = './src/vimrc'
-
-    if os.path.exists(target_path):
-        print('vimrc:', 'already exists')
-        print('vimrc: Back it up to ./src/vimrc.bak')
-        shutil.copyfile(target_path, './src/vimrc.bak')
-
-    shutil.copyfile(src_path, target_path)
-    print('vimrc: done\n')
-
-
-if __name__ == '__main__':
-    vimrc_install()
-    vim_plug_install()
-    
-    print('Enjoy!')
+print('Enjoy!')
 
