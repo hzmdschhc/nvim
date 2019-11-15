@@ -4,7 +4,7 @@ run ./install.py
 
 It will: 
 
-1. copy 'init.vim' to '~/.config/nvim/init.vim'
-2. install vim-plug
-3. install plug
-
+1. install neovim
+2. copy 'init.vim' to '~/.config/nvim/init.vim'
+3. install vim-plug
+4. install plug
