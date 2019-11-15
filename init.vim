@@ -13,6 +13,7 @@ Plug 'morhetz/gruvbox'
 
 " 文件导航栏
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+map <C-m> :NERDTreeToggle<CR>
 
 " 括号引号自动配对
 Plug 'jiangmiao/auto-pairs'
@@ -29,20 +30,11 @@ let g:NERDSpaceDelims = 1
 " 多点编辑
 Plug 'terryma/vim-multiple-cursors'
 
-" Requirements
-Plug 'roxma/nvim-yarp'
-
 " 自动补全
-if has('nvim')
-    Plug 'ncm2/ncm2'
-    Plug 'ncm2/ncm2-path'
-    Plug 'ncm2/ncm2-bufword'
-    Plug 'ncm2/ncm2-jedi'
-    " enable ncm2 for all buffers
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-    " IMPORTANT: :help Ncm2PopupOpen for more information
-    set completeopt=noinsert,menuone,noselect
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'Chiel92/vim-autoformat'
+noremap <F3> :Autoformat<CR>
 
 " Initialize plugin system
 call plug#end()
@@ -51,11 +43,6 @@ call plug#end()
 " colortheme
 colorscheme gruvbox
 set background=dark
-
-" 支持python3
-if has('nvim')
-    let g:python3_host_prog = $HOME . "/anaconda3/bin/python3"
-endif
 
 set tabstop=4
 set softtabstop=4
@@ -81,22 +68,18 @@ if &filetype == 'cpp'
 endif
 
 func! SetHeader()
+    let header = []
     if &filetype == 'python'
-        call setline(1, "#!/usr/bin/env python3")
-        call setline(2, "#-*- coding: utf-8 -*-")
-        call append(line("$"), "# **************************************")
-        call append(line("$"), "# Author        :   huangchao")
-        call append(line("$"), "# Created Time  :   ".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(line("$"), "# **************************************")
-        call append(line("$"), "")
+        call add(header, "#!/usr/bin/env python3")
+        call add(header, "# -*- coding: utf-8 -*-")
+        call add(header, "")
+
     elseif &filetype == 'sh'
-        call setline(1, "#!/bin/bash")
-        call append(line("$"), "# **************************************")
-        call append(line("$"), "# Author        :   huangchao")
-        call append(line("$"), "# Created Time  :   ".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(line("$"), "# **************************************")
-        call append(line("$"), "")
+        call add(header, "#!/bin/bash")
+        call add(header, "")
     endif
+
+    call append(0, header)
 endfunc
 
 autocmd BufNewFile * call SetHeader()
@@ -109,8 +92,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " -ctags setting -
-set tags=tags
-set tags+=./tags
+set tags=tags;
 
 set pastetoggle=<F2>
 
@@ -122,7 +104,7 @@ vmap <F5> <ESC>:call Run()<CR>
 func! Run()
 	exec "w"
 	if &filetype == 'python'
-		exec "!python3 %"
+		exec "!python %"
 	elseif &filetype == 'c'
 		exec "!gcc % -o %<"
 		exec "!./%<"
