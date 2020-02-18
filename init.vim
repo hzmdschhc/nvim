@@ -22,6 +22,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='simple'
+let g:airline_powerline_fonts = 1
 
 " 注释
 Plug 'scrooloose/nerdcommenter'
@@ -70,13 +71,11 @@ endif
 func! SetHeader()
     let header = []
     if &filetype == 'python'
-        call add(header, "#!/usr/bin/env python3")
-        call add(header, "# -*- coding: utf-8 -*-")
+        call add(header, "# coding=utf-8")
         call add(header, "")
 
     elseif &filetype == 'sh'
         call add(header, "#!/bin/bash")
-        call add(header, "")
     endif
 
     call append(0, header)
