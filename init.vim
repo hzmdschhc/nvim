@@ -63,7 +63,7 @@ set smartcase
 func! SetHeader()
     let header = []
     if &filetype == 'python'
-        call add(header, "-*- coding=utf-8 -*-")
+        call add(header, "# -*- coding=utf-8 -*-")
         call add(header, "")
 
     elseif &filetype == 'sh'
