@@ -1,28 +1,20 @@
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
 if has('nvim')
     call plug#begin('~/.local/share/nvim/plugged')
 else
     call plug#begin('~/.vim/plugged')
 endif
 
-
 " colortheme
 Plug 'morhetz/gruvbox'
 
 " 文件导航栏
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-map <C-m> :NERDTreeToggle<CR>
+Plug 'preservim/nerdtree'
 
 " 括号引号自动配对
 Plug 'jiangmiao/auto-pairs'
 
 " 状态栏
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='simple'
-let g:airline_powerline_fonts = 1
 
 " 注释
 Plug 'scrooloose/nerdcommenter'
@@ -35,43 +27,43 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'Chiel92/vim-autoformat'
-noremap <F3> :Autoformat<CR>
 
-" Initialize plugin system
 call plug#end()
 
-
-" colortheme
 colorscheme gruvbox
-set background=dark
 
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set fileformat=unix
 set encoding=utf-8
+set wrap
 syntax on
 set nu
+set relativenumber
+set cursorline
+set showcmd
+set wildmenu
 
 " 距离底部或顶部还有5行时滚动
 set scrolloff=5
 
-" 查找时不高亮
-set nohlsearch
-
-" 搜索忽略大小写
-" set ignorecase
-
-if &filetype == 'cpp'
-    set cindent
-endif
+"search
+set hlsearch
+exec 'nohlsearch'
+set incsearch
+set ignorecase
+set smartcase
 
 func! SetHeader()
     let header = []
     if &filetype == 'python'
-        call add(header, "# coding=utf-8")
+        call add(header, "-*- coding=utf-8 -*-")
         call add(header, "")
 
     elseif &filetype == 'sh'
@@ -103,21 +95,34 @@ vmap <F5> <ESC>:call Run()<CR>
 func! Run()
 	exec "w"
 	if &filetype == 'python'
-		exec "!python %"
-	elseif &filetype == 'c'
-		exec "!gcc % -o %<"
-		exec "!./%<"
-    elseif &filetype == 'cpp'
-        exec '!g++ -Wall -std=c++11 %'
-        exec '!./a.out'
-        exec '!rm a.out'
+		exec "!python -u %"
     elseif &filetype == 'sh'
         :!bash %
-    elseif &filetype == 'matlab'
-        exec "!octave-cli %"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!java %:r"
 	endif
 endfunc
+
+map s <nop>
+map S :w<CR>
+map Q :q<CR>
+map QQ :q!<CR>
+map R :source $MYVIMRC<CR>
+noremap <F3> :Autoformat<CR>
+
+" 分屏
+map sl :set splitright<CR>:vsplit<CR>
+map sh :set nosplitright<CR>:vsplit<CR>
+map sj :set splitbelow<CR>:split<CR>
+map sk :set nosplitbelow<CR>:split<CR>
+
+" 修改分屏窗口大小
+map <up> :res +5<CR>
+map <down> :res -5<CR>
+map <left> :vertical resize+5<CR>
+map <right> :vertical resize-5<CR>
+
+" tab
+map te :tabe<CR>
+map tl :+tabnext<CR>
+map th :-tabnext<CR>
+map tq :tabclose<CR>
 
