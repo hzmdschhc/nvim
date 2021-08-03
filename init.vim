@@ -44,8 +44,7 @@ let g:coc_global_extensions = [
 
 " coc config
 set hidden
-set cmdheight=2
-set updatetime=300
+set updatetime=100
 set shortmess+=c
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -185,4 +184,7 @@ map te :tabe<CR>
 map tl :+tabnext<CR>
 map th :-tabnext<CR>
 map tq :tabclose<CR>
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
