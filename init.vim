@@ -1,10 +1,8 @@
-let g:mapleader=" "
 if has('nvim')
     call plug#begin('~/.local/share/nvim/plugged')
 else
     call plug#begin('~/.vim/plugged')
 endif
-
 
 " colortheme
 Plug 'morhetz/gruvbox'
@@ -19,8 +17,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 
 " 注释
-Plug 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1
+Plug 'preservim/nerdcommenter'
 
 " 多点编辑
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -38,6 +35,12 @@ let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-python',
             \ 'coc-marketplace']
+
+let g:NERDSpaceDelims = 1
+let g:mapleader=" "
+let g:python3_host_prog="/home/chao/miniconda3/bin/python3"
+
+nnoremap <leader>n :NERDTree<CR>
 
 " coc config
 set hidden
@@ -90,6 +93,9 @@ endfunction
 
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 filetype on
 filetype indent on
@@ -181,7 +187,4 @@ map te :tabe<CR>
 map tl :+tabnext<CR>
 map th :-tabnext<CR>
 map tq :tabclose<CR>
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
