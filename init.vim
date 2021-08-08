@@ -28,8 +28,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " 自动补全
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'Chiel92/vim-autoformat'
-
 call plug#end()
 
 colorscheme gruvbox
@@ -38,7 +36,6 @@ colorscheme gruvbox
 let g:coc_global_extensions = [
             \ 'coc-vimlsp',
             \ 'coc-json',
-            \ 'coc-pyright',
             \ 'coc-python',
             \ 'coc-marketplace']
 
