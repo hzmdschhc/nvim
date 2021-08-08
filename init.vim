@@ -33,7 +33,7 @@ colorscheme gruvbox
 let g:coc_global_extensions = [
             \ 'coc-vimlsp',
             \ 'coc-json',
-            \ 'coc-python',
+            \ 'coc-pyright',
             \ 'coc-marketplace']
 
 let g:NERDSpaceDelims = 1
@@ -96,6 +96,16 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 filetype on
 filetype indent on
@@ -177,10 +187,10 @@ map sj :set splitbelow<CR>:split<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 
 " 修改分屏窗口大小
-map <up> :res +5<CR>
-map <down> :res -5<CR>
-map <left> :vertical resize+5<CR>
-map <right> :vertical resize-5<CR>
+map <up> :res -5<CR>
+map <down> :res +5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
 
 " tab
 map te :tabe<CR>
